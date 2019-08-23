@@ -1,3 +1,7 @@
 sc-tree-node {
     display: block;
 }
+
+sc-menu {
+    white-space: nowrap;
+}
