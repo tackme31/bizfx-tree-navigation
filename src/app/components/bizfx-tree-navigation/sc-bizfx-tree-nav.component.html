@@ -1,0 +1,8 @@
+<div>
+  <sc-menu *ngIf="!loading">
+    <sc-menu-category text="Commerce" icon="shopping_cart2" [open]="true">
+      <sc-tree-node *ngFor="let navView of navigationView?.ChildViews" [parent]="this" [view]="navView">
+      </sc-tree-node>
+    </sc-menu-category>
+  </sc-menu>
+</div>

@@ -1,0 +1,18 @@
+<li class="menu-item">
+  <button [disabled]="loading" (click)="toggleNode()" class="caret">
+    <img class="spinner" *ngIf="loading; else caret" src="../../../assets/images/sc-spinner32.gif">
+    <ng-template #caret>
+      {{ hasChildren ? (open ? '&#9660;' : '&#9658;') : '&nbsp;'}}  
+    </ng-template>
+  </button>
+  <span [ngSwitch]="linkType">
+      <a *ngSwitchCase="'Dashboard'" class="tree-nav-link" scMenuItemLink routerLink="/entityView/{{view.ItemId}}" id="link-{{view.Name}}" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{label}}</a>
+      <a *ngSwitchCase="'EntityLink'" class="tree-nav-link" scMenuItemLink routerLink="/entityView/Master/{{view.EntityVersion}}/{{view.ItemId}}" id="link-{{view.Name}}" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{label}}</a>
+      <a *ngSwitchCase="'ItemLink'" class="tree-nav-link" scMenuItemLink routerLink="/entityView/{{view.Name}}/{{view.EntityVersion}}/{{view.EntityId}}/{{view.ItemId}}" id="link-{{view.Name}}" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{label}}</a>
+      <a *ngSwitchCase="'SubItemLink'" class="tree-nav-link" scMenuItemLink routerLink="/entityView/{{view.Name}}/{{view.EntityVersion}}/{{builItemLink()}}" id="link-{{view.Name}}" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{label}}</a>
+      <span *ngSwitchDefault class="tree-nav-link" >{{label}}</span>
+  </span>
+  <div class="tree-node-children">
+    <div #children></div>
+  </div>
+</li>
