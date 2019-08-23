@@ -14,7 +14,6 @@ export class ScTreeNodeComponent implements OnInit {
   public open: boolean = false;
   public loading: boolean = false;
   public hasChildren: boolean = true;
-  private properties: { [name: string]: ScBizFxProperty } = {};
   private factory: ComponentFactory<ScTreeNodeComponent>;
 
   constructor(
@@ -24,10 +23,6 @@ export class ScTreeNodeComponent implements OnInit {
   ngOnInit(): void {
     this.factory = this.resolver.resolveComponentFactory(ScTreeNodeComponent);
 
-    this.view.Properties.forEach(prop => {
-      this.properties[prop.Name] = prop;
-    });
-
     // load children if no siblings
     if (this.parent instanceof ScTreeNodeComponent && this.parent.viewContainerRef.length == 1) {
       this.toggleNode();
@@ -35,13 +30,18 @@ export class ScTreeNodeComponent implements OnInit {
   }
 
   get label(): string {
-    var labelProp = this.properties['DisplayName']
-    || this.properties['Name']
-    || this.properties['UserName']
-    || this.properties['AddressName']
-    || (this.view.Name === 'EntityVersion' && this.properties['Version']);
+    const uiProp = this.view.Properties.find(prop => !!prop.UiType);
+    if (uiProp) {
+      return uiProp.Value;
+    }
 
-    return (labelProp && labelProp.Value) || this.view.DisplayName;
+    const props: any = {};
+    this.view.Properties.forEach(prop => props[prop.Name] = prop.Value);
+      
+    return (this.view.Name === 'EntityVersion' && props['Version'])
+    || props['DisplayName']
+    || props['Name']
+    || this.view.DisplayName;
   }
 
   get linkType(): string {
@@ -53,8 +53,8 @@ export class ScTreeNodeComponent implements OnInit {
       return 'EntityLink';
     }
 
-    var uiType = this.view.Properties.find(prop => !!prop.UiType)
-    return uiType ? uiType.UiType : 'None';
+    const uiProp = this.view.Properties.find(prop => !!prop.UiType);
+    return (uiProp && uiProp.UiType) || 'None';
   }
 
   builItemLink(): string {
