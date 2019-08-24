@@ -30,18 +30,22 @@ export class ScTreeNodeComponent implements OnInit {
   }
 
   get label(): string {
-    const uiProp = this.view.Properties.find(prop => !!prop.UiType);
-    if (uiProp) {
-      return uiProp.Value;
-    }
-
     const props: any = {};
     this.view.Properties.forEach(prop => props[prop.Name] = prop.Value);
-      
-    return (this.view.Name === 'EntityVersion' && props['Version'])
-    || props['DisplayName']
-    || props['Name']
-    || this.view.DisplayName;
+    if (props['DisplayName']) {
+      return props['DisplayName'];
+    }
+
+    if (this.view.Name === 'EntityVersion' && props['Version']) {
+      return props['Version']
+    }
+
+    const linkProp = this.view.Properties.find(prop => prop.UiType && prop.UiType.endsWith('Link'));
+    if (linkProp) {
+      return linkProp.Value;
+    }
+
+    return props['Name'] || this.view.DisplayName;
   }
 
   get linkType(): string {
