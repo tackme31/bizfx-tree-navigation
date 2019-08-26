@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ComponentFactory, ComponentFactoryResolver, ViewContainerRef, ViewChild } from '@angular/core';
 import { ScBizFxView, ScBizFxViewsService, ScBizFxProperty } from '@sitecore/bizfx'
-import { ScBizfxTreeNavComponent } from './sc-bizfx-tree-nav.component'
+import { ScBizFxTreeNavComponent } from './sc-bizfx-tree-nav.component'
 
 @Component({
   selector: 'sc-tree-node',
@@ -8,7 +8,7 @@ import { ScBizfxTreeNavComponent } from './sc-bizfx-tree-nav.component'
   styleUrls: ['./sc-tree-node.component.css']
 })
 export class ScTreeNodeComponent implements OnInit {
-  @Input() parent: ScTreeNodeComponent | ScBizfxTreeNavComponent;
+  @Input() parent: ScTreeNodeComponent | ScBizFxTreeNavComponent;
   @Input() view: ScBizFxView;
   @ViewChild('children', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
   public open: boolean = false;
@@ -49,7 +49,7 @@ export class ScTreeNodeComponent implements OnInit {
   }
 
   get linkType(): string {
-    if (this.parent instanceof ScBizfxTreeNavComponent) {
+    if (this.parent instanceof ScBizFxTreeNavComponent) {
       return 'Dashboard';
     }
 
@@ -103,7 +103,7 @@ export class ScTreeNodeComponent implements OnInit {
 
   async getChildViews(): Promise<ScBizFxView[]> {
     // convert navigation view to entity view
-    if (this.parent instanceof ScBizfxTreeNavComponent) {
+    if (this.parent instanceof ScBizFxTreeNavComponent) {
       const view = await this.viewsService.getView(this.view.ItemId);
       return Promise.resolve(view.ChildViews);
     }

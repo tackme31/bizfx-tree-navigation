@@ -56,7 +56,7 @@ import {
 } from './components';
 
 /* BizFx Tree Navigation */
-import { ScBizfxTreeNavComponent } from './components/bizfx-tree-navigation/sc-bizfx-tree-nav.component'
+import { ScBizFxTreeNavComponent } from './components/bizfx-tree-navigation/sc-bizfx-tree-nav.component'
 import { ScTreeNodeComponent } from './components/bizfx-tree-navigation/sc-tree-node.component';
 
 /**
@@ -145,7 +145,7 @@ registerLocaleData(localeJa, 'Ja-JP', localeJaExtra);
     DecimalPipe,
     CurrencyPipe,
     DatePipe,
-    ScBizfxTreeNavComponent,
+    ScBizFxTreeNavComponent,
     ScTreeNodeComponent
   ],
   providers: [

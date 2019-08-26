@@ -11,7 +11,7 @@ import {
   templateUrl: './sc-bizfx-tree-nav.component.html',
   styleUrls: ['./sc-bizfx-tree-nav.component.css']
 })
-export class ScBizfxTreeNavComponent extends ScBizFxNavComponent {
+export class ScBizFxTreeNavComponent extends ScBizFxNavComponent {
   constructor(bizFxContext: ScBizFxContextService, viewsService: ScBizFxViewsService, authService: ScBizFxAuthService) {
     super(bizFxContext, viewsService, authService);
   }

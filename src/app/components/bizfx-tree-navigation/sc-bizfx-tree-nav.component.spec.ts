@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScBizfxTreeNavComponent } from './sc-bizfx-tree-nav.component';
+import { ScBizFxTreeNavComponent } from './sc-bizfx-tree-nav.component';
 
-describe('ScBizfxTreeNavComponent', () => {
-  let component: ScBizfxTreeNavComponent;
-  let fixture: ComponentFixture<ScBizfxTreeNavComponent>;
+describe('ScBizFxTreeNavComponent', () => {
+  let component: ScBizFxTreeNavComponent;
+  let fixture: ComponentFixture<ScBizFxTreeNavComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScBizfxTreeNavComponent ]
+      declarations: [ ScBizFxTreeNavComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ScBizfxTreeNavComponent);
+    fixture = TestBed.createComponent(ScBizFxTreeNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
